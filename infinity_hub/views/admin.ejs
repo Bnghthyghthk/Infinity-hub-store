@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Infinity Hub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <div class="container">
+            <h1>∞ لوحة تحكم Infinity Hub</h1>
+            <nav>
+                <a href="/">المتجر</a>
+                <a href="#orders">الطلبات</a>
+                <a href="#shipping">أسعار الشحن</a>
+                <a href="#products">المنتجات</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <!-- Orders Section -->
+        <section id="orders" class="admin-section">
+            <h2>الطلبات الواردة</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="pending">قيد المعالجة</button>
+                <button class="filter-btn" data-filter="confirmed">مؤكد</button>
+                <button class="filter-btn" data-filter="shipped">تم الشحن</button>
+                <button class="filter-btn" data-filter="delivered">تم التسليم</button>
+            </div>
+            <div id="ordersList" class="orders-grid">
+                <% if (orders.length === 0) { %>
+                    <p class="no-data">لا توجد طلبات حتى الآن</p>
+                <% } else { %>
+                    <% orders.forEach(order => { %>
+                        <div class="order-card" data-status="<%= order.status %>" data-id="<%= order.id %>">
+                            <div class="order-header">
+                                <h3>طلب #<%= order.id %></h3>
+                                <span class="status-badge status-<%= order.status %>">
+                                    <%= order.status === 'pending' ? 'قيد المعالجة' : 
+                                        order.status === 'confirmed' ? 'مؤكد' : 
+                                        order.status === 'shipped' ? 'تم الشحن' : 'تم التسليم' %>
+                                </span>
+                            </div>
+                            <div class="order-details">
+                                <p><strong>العميل:</strong> <%= order.customerName %></p>
+                                <p><strong>الهاتف:</strong> <%= order.phone %></p>
+                                <p><strong>العنوان:</strong> <%= order.address %></p>
+                                <p><strong>المحافظة:</strong> <%= order.governorate %></p>
+                                <p><strong>تاريخ الطلب:</strong> <%= new Date(order.date).toLocaleDateString('ar-EG') %></p>
+                            </div>
+                            <div class="order-products">
+                                <h4>المنتجات:</h4>
+                                <ul>
+                                    <% order.products.forEach(product => { %>
+                                        <li><%= product.name %> x <%= product.quantity %> - <%= product.price * product.quantity %> جنيه</li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                            <div class="order-totals">
+                                <p>المجموع: <%= order.totalAmount %> جنيه</p>
+                                <p>الشحن: <%= order.shippingCost %> جنيه</p>
+                                <p class="final"><strong>الإجمالي: <%= order.totalAmount + order.shippingCost %> جنيه</strong></p>
+                            </div>
+                            <div class="order-actions">
+                                <select class="status-select" data-order-id="<%= order.id %>">
+                                    <option value="pending" <%= order.status === 'pending' ? 'selected' : '' %>>قيد المعالجة</option>
+                                    <option value="confirmed" <%= order.status === 'confirmed' ? 'selected' : '' %>>مؤكد</option>
+                                    <option value="shipped" <%= order.status === 'shipped' ? 'selected' : '' %>>تم الشحن</option>
+                                    <option value="delivered" <%= order.status === 'delivered' ? 'selected' : '' %>>تم التسليم</option>
+                                </select>
+                                <button class="update-status-btn" data-order-id="<%= order.id %>">تحديث الحالة</button>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+        </section>
+
+        <!-- Shipping Rates Section -->
+        <section id="shipping" class="admin-section">
+            <h2>تعديل أسعار الشحن للمحافظات</h2>
+            <p class="section-desc">يمكنك تعديل سعر الشحن لكل محافظة من هنا</p>
+            <div class="shipping-grid">
+                <% shippingRates.forEach(rate => { %>
+                    <div class="shipping-card">
+                        <h3><%= rate.governorate %></h3>
+                        <div class="shipping-input">
+                            <label>سعر الشحن (جنيه):</label>
+                            <input type="number" value="<%= rate.price %>" min="0" data-governorate="<%= rate.governorate %>">
+                            <button class="update-shipping-btn" data-governorate="<%= rate.governorate %>">تحديث</button>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="admin-section">
+            <h2>إضافة منتج جديد</h2>
+            <form id="addProductForm" class="product-form">
+                <input type="text" id="productName" placeholder="اسم المنتج" required>
+                <input type="number" id="productPrice" placeholder="السعر (جنيه)" min="0" required>
+                <input type="text" id="productCategory" placeholder="التصنيف" required>
+                <input type="url" id="productImage" placeholder="رابط الصورة (اختياري)">
+                <button type="submit" class="add-product-btn">إضافة المنتج</button>
+            </form>
+            
+            <h3 style="margin-top: 30px;">المنتجات الحالية</h3>
+            <div class="products-grid">
+                <% products.forEach(product => { %>
+                    <div class="product-card">
+                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                        <h3><%= product.name %></h3>
+                        <p class="category"><%= product.category %></p>
+                        <p class="price"><%= product.price %> جنيه</p>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Infinity Hub - لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
