@@ -1,0 +1,184 @@
+{
+  "shippingRates": [
+    {
+      "governorate": "القاهرة",
+      "price": 35
+    },
+    {
+      "governorate": "الجيزة",
+      "price": 30
+    },
+    {
+      "governorate": "الإسكندرية",
+      "price": 35
+    },
+    {
+      "governorate": "الدقهلية",
+      "price": 40
+    },
+    {
+      "governorate": "الشرقية",
+      "price": 40
+    },
+    {
+      "governorate": "الغربية",
+      "price": 40
+    },
+    {
+      "governorate": "المنوفية",
+      "price": 40
+    },
+    {
+      "governorate": "القليوبية",
+      "price": 35
+    },
+    {
+      "governorate": "كفر الشيخ",
+      "price": 45
+    },
+    {
+      "governorate": "دمياط",
+      "price": 45
+    },
+    {
+      "governorate": "بورسعيد",
+      "price": 45
+    },
+    {
+      "governorate": "الإسماعيلية",
+      "price": 45
+    },
+    {
+      "governorate": "السويس",
+      "price": 40
+    },
+    {
+      "governorate": "البحيرة",
+      "price": 40
+    },
+    {
+      "governorate": "مطروح",
+      "price": 60
+    },
+    {
+      "governorate": "الأقصر",
+      "price": 55
+    },
+    {
+      "governorate": "أسوان",
+      "price": 55
+    },
+    {
+      "governorate": "قنا",
+      "price": 50
+    },
+    {
+      "governorate": "سوهاج",
+      "price": 50
+    },
+    {
+      "governorate": "أسيوط",
+      "price": 50
+    },
+    {
+      "governorate": "المنيا",
+      "price": 45
+    },
+    {
+      "governorate": "بني سويف",
+      "price": 40
+    },
+    {
+      "governorate": "الفيوم",
+      "price": 40
+    },
+    {
+      "governorate": "الوادي الجديد",
+      "price": 70
+    },
+    {
+      "governorate": "البحر الأحمر",
+      "price": 60
+    },
+    {
+      "governorate": "جنوب سيناء",
+      "price": 65
+    },
+    {
+      "governorate": "شمال سيناء",
+      "price": 65
+    }
+  ],
+  "orders": [
+    {
+      "id": 1776811022716,
+      "customerName": "أحمد محمد",
+      "phone": "01012345678",
+      "address": "15 شارع التحرير، الدقي",
+      "governorate": "الجيزة",
+      "products": [
+        {
+          "id": 1,
+          "name": "قميص كلاسيك أبيض",
+          "price": 250,
+          "quantity": 2
+        }
+      ],
+      "totalAmount": 500,
+      "shippingCost": 30,
+      "status": "confirmed",
+      "date": "2026-04-21T22:37:02.716Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "قميص كلاسيك أبيض",
+      "price": 250,
+      "image": "https://via.placeholder.com/300x400?text=Classic+White+Shirt",
+      "category": "قمصان"
+    },
+    {
+      "id": 2,
+      "name": "بنطلون جينز أزرق",
+      "price": 350,
+      "image": "https://via.placeholder.com/300x400?text=Blue+Jeans",
+      "category": "بنطلونات"
+    },
+    {
+      "id": 3,
+      "name": "تيشيرت قطني أسود",
+      "price": 150,
+      "image": "https://via.placeholder.com/300x400?text=Black+Cotton+T-Shirt",
+      "category": "تيشيرتات"
+    },
+    {
+      "id": 4,
+      "name": "جاكيت شتوي رمادي",
+      "price": 550,
+      "image": "https://via.placeholder.com/300x400?text=Winter+Jacket",
+      "category": "جاكيتات"
+    },
+    {
+      "id": 5,
+      "name": "بدلة رسمية كحلية",
+      "price": 1200,
+      "image": "https://via.placeholder.com/300x400?text=Navy+Suit",
+      "category": "بدل"
+    },
+    {
+      "id": 6,
+      "name": "حذاء جلدي بني",
+      "price": 450,
+      "image": "https://via.placeholder.com/300x400?text=Brown+Leather+Shoes",
+      "category": "أحذية"
+    },
+    {
+      "id": 1776811029414,
+      "name": "قميص صيفي أزرق",
+      "price": 200,
+      "image": "https://via.placeholder.com/300x400?text=Summer+Blue+Shirt",
+      "category": "قمصان"
+    }
+  ]
+}

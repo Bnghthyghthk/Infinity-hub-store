@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Hub - متجر الملابس الرجالية</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>∞ Infinity Hub</h1>
+            <p>متجر الملابس الرجالية المتكامل</p>
+            <nav>
+                <a href="/">الرئيسية</a>
+                <a href="#products">المنتجات</a>
+                <a href="#cart" id="cartLink">السلة (<span id="cartCount">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>أهلاً بك في Infinity Hub</h2>
+            <p>أفضل الملابس الرجالية بأفضل الأسعار - الدفع عند الاستلام</p>
+        </section>
+
+        <section id="products" class="products-section">
+            <h2>منتجاتنا</h2>
+            <div class="products-grid">
+                <% products.forEach(product => { %>
+                    <div class="product-card" data-id="<%= product.id %>" data-name="<%= product.name %>" data-price="<%= product.price %>">
+                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                        <h3><%= product.name %></h3>
+                        <p class="category"><%= product.category %></p>
+                        <p class="price"><%= product.price %> جنيه</p>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+
+        <section id="cart" class="cart-section">
+            <h2>سلة التسوق</h2>
+            <div id="cartItems"></div>
+            <div id="cartSummary" style="display: none;">
+                <div class="cart-total">
+                    <p>المجموع: <span id="subtotal">0</span> جنيه</p>
+                </div>
+                
+                <div class="shipping-section">
+                    <h3>معلومات الشحن</h3>
+                    <select id="governorateSelect">
+                        <option value="">اختر المحافظة</option>
+                        <% shippingRates.forEach(rate => { %>
+                            <option value="<%= rate.governorate %>" data-price="<%= rate.price %>"><%= rate.governorate %> - <%= rate.price %> جنيه</option>
+                        <% }); %>
+                    </select>
+                    <p class="shipping-cost">تكلفة الشحن: <span id="shippingCost">0</span> جنيه</p>
+                </div>
+
+                <div class="order-form">
+                    <h3>بيانات العميل</h3>
+                    <input type="text" id="customerName" placeholder="الاسم بالكامل" required>
+                    <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+                    <textarea id="address" placeholder="العنوان بالتفصيل" required></textarea>
+                    
+                    <div class="final-total">
+                        <p>الإجمالي النهائي: <span id="finalTotal">0</span> جنيه</p>
+                    </div>
+                    
+                    <button id="submitOrder" class="checkout-btn">إتمام الطلب (الدفع عند الاستلام)</button>
+                </div>
+            </div>
+            <p id="emptyCart" class="empty-cart">السلة فارغة</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Infinity Hub - جميع الحقوق محفوظة</p>
+            <p>الشحن لجميع محافظات مصر - الدفع عند الاستلام</p>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
